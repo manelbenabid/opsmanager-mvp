@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Or a newer ECMAScript version supported by your Node.js runtime
+    "module": "commonjs", // Correct for modern Node.js with ES Modules
+    // "moduleResolution": "NodeNext", // Correct for modern Node.js with ES Modules
+    "outDir": "./dist", // Output directory for compiled JavaScript
+    "rootDir": "./", // Source directory containing your .ts files
+    "esModuleInterop": true, // Enables interoperability with CommonJS modules
+    "strict": true, // Enables all strict type-checking options
+    "resolveJsonModule": true, // Allows importing .json files (e.g., serviceAccountKey.json)
+    "forceConsistentCasingInFileNames": true, // Enforces consistent file naming
+    "sourceMap": true, // Generates source maps for easier debugging
+    "declaration": true, // Optional: generates .d.ts files for your compiled code
+    "skipLibCheck": true, // Optional: Speeds up compilation by skipping type checking of declaration files
+    // "experimentalDecorators": true, // Uncomment if you use decorators
+    // "emitDecoratorMetadata": true   // Uncomment if you use decorators
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types" // Add this line if needed
+    ]
+  },
+  "include": [
+    "**/*.ts", // Include all .ts files within the 'src' directory
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules", // Exclude the node_modules directory
+    "dist", // Exclude the output directory to prevent re-processing
+    "**/*.spec.ts", // Exclude test files (if you use a .spec.ts naming convention)
+    "**/*.test.ts" // Exclude test files (if you use a .test.ts naming convention)
+  ]
+}

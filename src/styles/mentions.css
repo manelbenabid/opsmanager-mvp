@@ -1,0 +1,131 @@
+/* src/styles/mentions.css */
+
+/* Apply this class to your <MentionsInput className="custom-mentions-input" /> */
+.custom-mentions-input > div { /* Targets the main control div */
+  background-color: #fff; /* --background equivalent for light mode */
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  border: 1px solid hsl(var(--input)); /* Using your CSS variable */
+  border-radius: var(--radius); /* Using your CSS variable */
+  min-height: 40px;
+  padding: 0; /* Reset padding on the wrapper, apply to textarea/highlighter */
+}
+
+/* Styling the actual textarea and the highlighter div (which mirrors the text for mentions) */
+.custom-mentions-input textarea,
+.custom-mentions-input > div > div { /* Targets highlighter div */
+  min-height: 68px; /* From your &multiLine.control.minHeight */
+  padding: 8px 12px; /* From your &multiLine control/highlighter/input padding */
+  font-size: 14px;   /* Ensure font settings match for proper alignment */
+  line-height: 1.5;
+  font-weight: 400;
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+  border: none; /* Border is on the parent control div */
+  background-color: transparent; /* Textarea should be transparent over highlighter */
+}
+
+.custom-mentions-input textarea {
+  color: hsl(var(--foreground)); /* Text color */
+}
+
+
+/* Focus style for the main control div */
+.custom-mentions-input > div:focus-within {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 1px hsl(var(--ring)); /* Example focus ring */
+}
+
+/* Suggestions List */
+/* react-mentions usually adds classes like 'mentions__suggestions__list' */
+/* You can use the style prop for this, or target default classes if known, or wrap if library allows */
+.custom-mentions-input ul { /* Assuming suggestions are in a ul */
+  background-color: hsl(var(--popover)); /* Use popover background */
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  font-size: 14px;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  margin-top: 2px; /* Example spacing */
+  padding: 0;
+  list-style: none;
+  position: absolute; /* This usually needs to be handled carefully */
+  z-index: 10; /* Ensure it's above other content */
+}
+
+/* Suggestion Item */
+.custom-mentions-input li { /* Assuming suggestions are list items */
+  padding: 5px 15px;
+  border-bottom: 1px solid hsla(var(--border) / 0.5); /* Lighter border for items */
+  cursor: pointer;
+}
+
+.custom-mentions-input li:last-child {
+  border-bottom: none;
+}
+
+/* Focused/Hovered Suggestion Item */
+/* react-mentions often has a class like 'mentions__suggestions__item--focused' */
+.custom-mentions-input li:hover,
+.custom-mentions-input li.focused-suggestion-item { /* Add a custom class on focus via renderSuggestion if needed */
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Style for the mention text itself *within the input area* */
+/* This targets the spans that react-mentions creates for mentions.
+   The library usually applies a class like 'mentions__mention' or similar.
+   Or you can pass a `className` to the `<Mention>` component's `style` or `className` prop.
+   The `mentionStyle` JS object is more direct for this part.
+   If you want to use CSS, you'd inspect the generated span and target its class.
+*/
+.custom-mentions-input strong { /* react-mentions often wraps mentions in <strong> or a span with a specific class */
+  color: hsl(var(--primary));
+  font-weight: 500; /* As per your mentionStyle */
+  background-color: hsla(var(--primary) / 0.1); /* As per your mentionStyle */
+  padding: 1px 0; /* As per your mentionStyle */
+  border-radius: 3px; /* Custom addition */
+}
+
+/* If react-mentions uses a specific class for the highlighted mention text */
+.mentions__mention { /* This is a common default class name used by the library */
+  color: hsl(var(--primary));
+  font-weight: 500;
+  background-color: hsla(var(--primary) / 0.1);
+  padding: 1px 0px; /* Adjusted from your JS '1px 0' */
+  border-radius: 3px;
+}
+
+/* Dark mode adjustments (if your CSS variables change for dark mode) */
+.dark .custom-mentions-input > div {
+  background-color: hsl(var(--background)); /* Dark background */
+  border-color: hsl(var(--input));
+}
+
+.dark .custom-mentions-input textarea {
+  color: hsl(var(--foreground));
+}
+
+.dark .custom-mentions-input > div:focus-within {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 1px hsl(var(--ring));
+}
+
+.dark .custom-mentions-input ul {
+  background-color: hsl(var(--popover));
+  border-color: hsl(var(--border));
+}
+
+.dark .custom-mentions-input li:hover,
+.dark .custom-mentions-input li.focused-suggestion-item {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.dark .mentions__mention {
+  color: hsl(var(--primary)); /* Ensure primary color for dark mode is suitable */
+  background-color: hsla(var(--primary) / 0.2); /* Slightly more opaque for dark mode */
+}
